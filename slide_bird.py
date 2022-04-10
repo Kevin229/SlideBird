@@ -1,6 +1,9 @@
-import pygame, sys, random
-import config
+import pygame
+import random
+import sys
 from pygame.locals import *
+
+import config
 from gif_image import GIFImage
 
 pygame.init()
@@ -17,7 +20,7 @@ bird_flap_sound = pygame.mixer.Sound(config.BIRD_FLAP)
 game_over_sound = pygame.mixer.Sound(config.GAME_OVER)
 
 
-class SlideBird():
+class SlideBird:
     def __init__(self):
         self.width = config.BIRD_WIDTH
         self.height = config.BIRD_HEIGHT
@@ -45,7 +48,7 @@ class SlideBird():
             pass
 
 
-class Obstacle():
+class Obstacle:
     def __init__(self):
         self.width = config.OBSTACLE_WIDTH
         self.height = config.OBSTACLE_HEIGHT
@@ -106,16 +109,16 @@ def is_game_over(bird, obstacle):
     return False
 
 
-class Score():
+class Score:
     def __init__(self):
         self.score = 0
         self.addScore = True
 
     def draw(self):
         font = pygame.font.SysFont('consolas', 40)
-        score_suface = font.render(str(self.score), True, (0, 0, 0))
-        text_size = score_suface.get_size()
-        display_surface.blit(score_suface, (int((config.WINDOW_WIDTH - text_size[0]) / 2), 100))
+        score_surface = font.render(str(self.score), True, (0, 0, 0))
+        text_size = score_surface.get_size()
+        display_surface.blit(score_surface, (int((config.WINDOW_WIDTH - text_size[0]) / 2), 100))
 
     def update(self, bird, columns):
         collision = False
@@ -136,12 +139,12 @@ class Score():
 def game_start(bird):
     bird.__init__()
     font = pygame.font.SysFont('consolas', 60)
-    heading_suface = font.render('SLIDE BIRD', True, (255, 0, 0))
-    heading_size = heading_suface.get_size()
+    heading_surface = font.render('SLIDE BIRD', True, (255, 0, 0))
+    heading_size = heading_surface.get_size()
 
     font = pygame.font.SysFont('consolas', 20)
-    comment_suface = font.render('Click to start', True, (0, 0, 0))
-    comment_size = comment_suface.get_size()
+    comment_surface = font.render('Click to start', True, (0, 0, 0))
+    comment_size = comment_surface.get_size()
 
     if pygame.mixer.Channel(0).get_busy():
         pygame.mixer.Channel(0).stop()
@@ -161,8 +164,8 @@ def game_start(bird):
 
         display_surface.fill(config.BACK_GROUND_COLOR)
         bird.draw()
-        display_surface.blit(heading_suface, (int((config.WINDOW_WIDTH - heading_size[0]) / 2), 100))
-        display_surface.blit(comment_suface, (int((config.WINDOW_WIDTH - comment_size[0]) / 2), 500))
+        display_surface.blit(heading_surface, (int((config.WINDOW_WIDTH - heading_size[0]) / 2), 100))
+        display_surface.blit(comment_surface, (int((config.WINDOW_WIDTH - comment_size[0]) / 2), 500))
 
         pygame.display.update()
         fps_clock.tick(config.FPS)
@@ -215,16 +218,16 @@ def game_play(bird, obstacles, score):
 
 def game_over(bird, obstacles, score):
     font = pygame.font.SysFont('consolas', 60)
-    heading_suface = font.render('GAME OVER', True, (255, 0, 0))
-    heading_size = heading_suface.get_size()
+    heading_surface = font.render('GAME OVER', True, (255, 0, 0))
+    heading_size = heading_surface.get_size()
 
     font = pygame.font.SysFont('consolas', 20)
-    comment_suface = font.render('Press "space" to replay', True, (0, 0, 0))
-    comment_size = comment_suface.get_size()
+    comment_surface = font.render('Press "space" to replay', True, (0, 0, 0))
+    comment_size = comment_surface.get_size()
 
     font = pygame.font.SysFont('consolas', 30)
-    score_suface = font.render('Score: ' + str(score.score), True, (0, 0, 0))
-    score_size = score_suface.get_size()
+    score_surface = font.render('Score: ' + str(score.score), True, (0, 0, 0))
+    score_size = score_surface.get_size()
 
     if pygame.mixer.Channel(0).get_busy():
         pygame.mixer.Channel(0).stop()
@@ -246,9 +249,9 @@ def game_over(bird, obstacles, score):
         display_surface.fill(config.BACK_GROUND_COLOR)
         obstacles.draw()
         bird.draw()
-        display_surface.blit(heading_suface, (int((config.WINDOW_WIDTH - heading_size[0]) / 2), 100))
-        display_surface.blit(comment_suface, (int((config.WINDOW_WIDTH - comment_size[0]) / 2), 500))
-        display_surface.blit(score_suface, (int((config.WINDOW_WIDTH - score_size[0]) / 2), 160))
+        display_surface.blit(heading_surface, (int((config.WINDOW_WIDTH - heading_size[0]) / 2), 100))
+        display_surface.blit(comment_surface, (int((config.WINDOW_WIDTH - comment_size[0]) / 2), 500))
+        display_surface.blit(score_surface, (int((config.WINDOW_WIDTH - score_size[0]) / 2), 160))
 
         pygame.display.update()
         fps_clock.tick(config.FPS)
